@@ -16,6 +16,9 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
+# django_project/settings.py
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,10 +46,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'masterlanguage',
-    'autenticacion',
+    #'autenticacion',
     'web',
+    'oauth',
     'bootstrap5',
     'django_bootstrap_icons',
+    'allauth',
+    'allauth.account',
+    # Optional -- requires install using `django-allauth[socialaccount]`.
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
 ]
 
 MIDDLEWARE = [
@@ -57,6 +66,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # Add the account middleware:
+    'allauth.account.middleware.AccountMiddleware',
 ]
 
 ROOT_URLCONF = 'masterlanguage.urls'
@@ -64,7 +75,13 @@ ROOT_URLCONF = 'masterlanguage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [BASE_DIR / 'web' / 'templates',
+                 #BASE_DIR / 'lms' / 'templates',
+                 #BASE_DIR / 'diagnostico' / 'templates',
+                 #BASE_DIR / 'autenticacion' / 'templates',
+                 BASE_DIR / 'masterlanguage' / 'templates',
+                 #BASE_DIR / 'cms' / 'templates',
+                 BASE_DIR / 'oauth' / 'templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -80,6 +97,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'masterlanguage.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = [
+     # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend', 
+]
+
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -92,6 +117,27 @@ DATABASES = {
         'PASSWORD': env('DBPassword'),
         'HOST': env('DBHost'),
         'PORT': env('DBPort'),
+    }
+}
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        },
+        'APP': {
+            'client_id': '189593328-ufg3g933jhqi98bo6439d28tokucpu24.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
     }
 }
 
@@ -142,3 +188,21 @@ MEDIAFILES_DIRS = [BASE_DIR / "media"]
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Allauth settings
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# Login settings
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+# mercado pago test
+MERCADO_PAGO_PUBLIC_KEY_TEST = env('MPPublicKeyTest')
+MERCADO_PAGO_ACCESS_TOKEN_TEST = env('MPAccessTokenTest')
+
+# mercado pago produccion
+#MERCADO_PAGO_PUBLIC_KEY = env('MPPublicKey')
+#MERCADO_PAGO_ACCESS_TOKEN = env('MPAccessToken')
+
+
