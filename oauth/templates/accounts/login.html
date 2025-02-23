@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% load socialaccount %}
+
+{% load static %}
+
 {% block title %}Login{% endblock %}
 
 {% block content %}
@@ -39,11 +43,14 @@
             </div>
 
             <!-- Link a pagina de registro -->
-            <p>No tienes una cuenta <a href="signup/">Registrate</a> </p>
+            <p>No tienes una cuenta <a href="register/">Registrate</a> </p>
 
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary">Submit</button>
+                        
+            
         </form>
+        
     </div>
 
 {% endblock %}

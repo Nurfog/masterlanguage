@@ -11,6 +11,6 @@ urlpatterns = [
     path('team/', views.team, name='team'),
     path('testimonial/', views.testimonial, name='testimonial'),
     path('error_404/', views.error_404, name='error_404'),
-    path('account/', views.login, name='account'),    
+    path('accounts/', views.login, name='account_login'),    
 ]
 

@@ -3,11 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
-from oauth.views import *
-
-
-
-
+from oauth import *
 
 
 def index(request):
@@ -38,7 +34,7 @@ def csrf(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
 def login(request):
-    return render(request, 'account/login.html')
+    return render(request, 'accounts/login.html')
 
 
 

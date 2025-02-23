@@ -16,7 +16,7 @@ def login_page(request):
         if not User.objects.filter(username=username).exists():
             # Display an error message if the username does not exist
             messages.error(request, 'Invalid Username')
-            return redirect('/login/')
+            return redirect('login/')
         
         # Authenticate the user with the provided username and password
         user = authenticate(username=username, password=password)
@@ -24,14 +24,14 @@ def login_page(request):
         if user is None:
             # Display an error message if authentication fails (invalid password)
             messages.error(request, "Invalid Password")
-            return redirect('/login/')
+            return redirect('login/')
         else:
             # Log in the user and redirect to the home page upon successful login
             login(request, user)
             return redirect('/lms/dashboard/')
     
     # Render the login page template (GET request)
-    return render(request, 'account/login.html')
+    return render(request, 'cuenta/login.html')
 
 # Define a view function for the registration page
 def register_page(request):
@@ -48,7 +48,7 @@ def register_page(request):
         if user.exists():
             # Display an information message if the username is taken
             messages.info(request, "Username already taken!")
-            return redirect('signup/')
+            return redirect('register/')
         
         # Create a new User object with the provided information
         user = User.objects.create_user(
@@ -63,10 +63,10 @@ def register_page(request):
         
         # Display an information message indicating successful account creation
         messages.info(request, "Account created Successfully!")
-        return redirect('signup/')
+        return redirect('register/')
     
     # Render the registration page template (GET request)
-    return render(request, 'account/register.html')
+    return render(request, 'cuenta/register.html')
 
 def logout_page(request):
     logout(request)
