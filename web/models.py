@@ -22,3 +22,11 @@ class Slider(models.Model):
 
     def __str__(self):
         return self.titulo
+    
+    def update (self, *args, **kwargs):
+        self.fecha_publicacion = models.DateTimeField(auto_now=True)
+        super().update(*args, **kwargs)
+        
+    def save(self, *args, **kwargs):
+        self.fecha_publicacion = models.DateTimeField(auto_now=True)
+        super().save(*args, **kwargs)
