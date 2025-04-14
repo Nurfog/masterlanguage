@@ -1,0 +1,17 @@
+{% extends 'master.html' %}
+{% block title %}Crear paises{% endblock %}
+{% block content %}   
+
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            <h1 class="text-primary" style="text-align: center;"><span >Listado de paises</span></h1>
+            <ul>
+                {% for pais in paises %}
+                <li>{{pais.nombre}} - {{pais.codigo}} - {{pais.nacionalidad}} - {{pais.moneda}} - {% if pais.estado %} Activo {% else %} Inactivo {% endif %}</li>
+                {% endfor %}
+            </ul>
+        </form>
+        <a href="{% url 'crear_pais' %}">Crear Nuevo Pais</a>
+    </div>
+
+{% endblock %}

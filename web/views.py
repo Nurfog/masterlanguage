@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from .models import *
 from django.http import JsonResponse
 from django.middleware.csrf import get_token
+from cms.forms import PaisForm
+
+
 
 
 def index(request):
@@ -34,3 +36,4 @@ def csrf(request):
 
 def login(request):
     return render(request, 'account/login.html')
+
