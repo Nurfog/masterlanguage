@@ -1,5 +1,5 @@
 {% load static %}
-{% load django_bootstrap5 %}
+{% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 {% load bootstrap_icons %}
@@ -14,28 +14,57 @@
 
 
 <!-- Navbar inicio -->
-<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse " id="navbarCollapse">
-            <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" style="color: white;">Paises</a>
-                <div class="dropdown-menu fade-down m-0">
-                    <a href="{% url 'crear_pais' %}" class="dropdown-item">Crear pais</a>
-                    <a href="{% url 'lista_paises' %}" class="dropdown-item">Lista de paises</a>
-                </div>
-            </div>
-            
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"  aria-expanded="false">
-                {{user.username}}
-            </button>
-            <ul class="dropdown-menu dropdown-content" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="{% url 'profile' %}">Perfil</a></li>
-                    
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Sign out</a></li>   
-            </ul>
-        </div>
+        <ul class="navbar-nav">
+        <!-- Dropdown -->
+            <li class="nav-item dropdown">
+                <a data-mdb-dropdown-init class="nav-link dropdown-toggle" href="#"
+                    id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    Dropdown link
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="#">Action</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">
+                            Submenu &raquo;
+                        </a>
+                        <ul class="dropdown-menu dropdown-submenu">
+                            <li>
+                                <a class="dropdown-item" href="#">Submenu item 1</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Submenu item 2</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Submenu item 3 &raquo; </a>
+                                <ul class="dropdown-menu dropdown-submenu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Multi level 1</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Multi level 2</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Submenu item 4</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="#">Submenu item 5</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </nav>
+  
+  
 <!-- Navbar fin -->
