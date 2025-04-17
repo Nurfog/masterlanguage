@@ -1,0 +1,18 @@
+# This file is used to store environment variables for the application.
+Secret_key="L9j7d8?&5;PrCgvck-z6ES_{,w!~nD*sWBu<4xTRXGUZ>)Fa:M"
+#base de datos
+db='ml'
+User='root'
+Password='apoca11'
+Host='localhost'
+Puerto='3306'
+
+# Correo electrónico
+EmailBackend = 'django.core.mail.backends.smtp.EmailBackend'
+Email_Host = 'smtp.gmail.com'
+Email_Port = 587
+Email_Use_Tls = True
+Email = 'juan.allende@gmail.com'
+Email_password = 'qckdrfthkuermmda'
+DEFAULT_FROM_EMAIL = 'juan.allende@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[LMS] '
