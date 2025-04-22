@@ -30,8 +30,6 @@
     const $dropdown = $(".dropdown");
     const $dropdownToggle = $(".dropdown-toggle");
     const $dropdownMenu = $(".dropdown-menu");
-    const $dropdownsubmenu = $(".dropdown-submenu");
-    const $dropdownsubmenuToggle = $(".dropdown-submenu-toggle");
     const showClass = "show";
     
     $(window).on("load resize", function() {
@@ -42,16 +40,12 @@
                 $this.addClass(showClass);
                 $this.find($dropdownToggle).attr("aria-expanded", "true");
                 $this.find($dropdownMenu).addClass(showClass);
-                $this.find($dropdownsubmenu).removeClass(showClass);
-                $this.find($dropdownsubmenuToggle).attr("aria-expanded", "false");
             },
             function() {
                 const $this = $(this);
                 $this.removeClass(showClass);
                 $this.find($dropdownToggle).attr("aria-expanded", "false");
                 $this.find($dropdownMenu).removeClass(showClass);
-                $this.find($dropdownsubmenu).removeClass(showClass);
-                $this.find($dropdownsubmenuToggle).attr("aria-expanded", "false");
             }
             );
         } else {
@@ -110,7 +104,5 @@
             }
         }
     });
-
-
+    
 })(jQuery);
-
