@@ -7,7 +7,7 @@
             <span >Lista de paises</span>
         </h1>
 
-        <table class="table table-striped table-bordered capitalization">
+        <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>Nombre</th>
@@ -35,15 +35,15 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{% url 'editar_pais' id=pais.id %}">Editar</a> |
-                        <a href="{% url 'eliminar_pais' id=pais.id %}">Eliminar</a>
+                        <a class="btn btn-primary py-0 px-2" href="{% url 'editar_pais' id=pais.id %}"><i class="fa fa-fw fa-edit"></i>Editar</a>
+                        <a class="btn btn-danger py-0 px-2" href="{% url 'eliminar_pais' id=pais.id %}"><i class="fa fa-fw fa-trash"></i>Eliminar</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
 
-        <a href="{% url 'crear_pais' %}">Crear Nuevo Pais</a>
+        <a class="btn btn-primary" href="{% url 'crear_pais' %}"><i class="fa fa-fw fa-plus"></i>Crear Nuevo Pais</a>
     </div>
 
 {% endblock %}

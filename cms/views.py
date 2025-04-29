@@ -10,6 +10,11 @@ def crear_pais(request):
     if request.method == 'POST':
         form = PaisForm(request.POST)
         if form.is_valid():
+            #guardar datos en mayusculas
+            form.instance.codigo = form.instance.codigo.upper()
+            form.instance.nombre = form.instance.nombre.capitalize()
+            form.instance.nacionalidad = form.instance.nacionalidad.capitalize()
+            form.instance.moneda = form.instance.moneda.upper()
             form.save()
             return redirect('lista_paises')
     else: 
@@ -28,14 +33,12 @@ def editar_pais(request, id):
     if request.method == 'POST':
         form = PaisForm(request.POST, instance=paix)
         if form.is_valid():
-            #guardar los datos en la base de datos en mayuscula
-            form.codigo = form.cleaned_data['codigo'].upper()
-            form.nombre = form.cleaned_data['nombre'].upper()
-            form.nacionalidad = form.cleaned_data['nacionalidad'].upper()
-            form.moneda = form.cleaned_data['moneda'].upper()
+            #guardar datos en mayusculas
+            form.instance.codigo = form.instance.codigo.upper()
+            form.instance.nombre = form.instance.nombre.capitalize()
+            form.instance.nacionalidad = form.instance.nacionalidad.capitalize()
+            form.instance.moneda = form.instance.moneda.upper()
             form.save()
-            #form.save(commit=False)
-
             return redirect('lista_paises')
     else:
         form = PaisForm(instance=paix)
