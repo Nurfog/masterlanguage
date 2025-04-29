@@ -24,21 +24,28 @@ def lista_paises(request):
 @login_required
 @csrf_exempt
 def editar_pais(request, id):
-    pais = pais.objects.get(id=id)
+    paix = pais.objects.get(id=id)
     if request.method == 'POST':
-        form = PaisForm(request.POST, instance=pais)
+        form = PaisForm(request.POST, instance=paix)
         if form.is_valid():
+            #guardar los datos en la base de datos en mayuscula
+            form.codigo = form.cleaned_data['codigo'].upper()
+            form.nombre = form.cleaned_data['nombre'].upper()
+            form.nacionalidad = form.cleaned_data['nacionalidad'].upper()
+            form.moneda = form.cleaned_data['moneda'].upper()
             form.save()
+            #form.save(commit=False)
+
             return redirect('lista_paises')
     else:
-        form = PaisForm(instance=pais)
-    return render(request, 'pages/editar_pais.html', {'form': form, 'pais': pais})
+        form = PaisForm(instance=paix)
+    return render(request, 'pages/editar_pais.html', {'form': form, 'pais': paix})
 
 @login_required
 @csrf_exempt
 def eliminar_pais(request, id):
-    pais = pais.objects.get(id=id)
-    pais.delete()
+    paix = pais.objects.get(id=id)
+    paix.delete()
     return redirect('lista_paises')
 
 @login_required
