@@ -87,6 +87,15 @@ TEMPLATES = [
     },
 ]
 
+AUTHENTICATION_BACKENDS = [
+     # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by email
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
@@ -156,16 +165,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Email settings
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'juan.allende@gmail.com'
-EMAIL_HOST_PASSWORD = 'qckdrfthkuermmda'
-DEFAULT_FROM_EMAIL = 'juan.allende@gmail.com'
-EMAIL_TIMEOUT = 5  # seconds
-
-
-
-
+# Configuración de Allauth
+SITE_ID = 1
