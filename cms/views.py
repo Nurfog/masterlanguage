@@ -4,6 +4,13 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import *
 from .forms import *
 
+
+@login_required
+@csrf_exempt
+def dashboardcms(request):
+    return render(request, 'pages/dashboardcms.html')
+
+
 @login_required
 @csrf_exempt
 def crear_pais(request):

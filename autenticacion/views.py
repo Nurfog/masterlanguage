@@ -3,10 +3,6 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-import requests
-from django.urls import reverse
-from django.conf import settings
-
 
 
 def login_page(request):
@@ -31,7 +27,7 @@ def login_page(request):
         else:
             # Inicializa la sesión y redirecciona a la página dashboard
             login(request, user)
-            return redirect('/lms/dashboard/')
+            return redirect('dashboardcms')
     
     # Renderiza la página de inicio de sesión (GET request)
     return render(request, 'account/login.html')
