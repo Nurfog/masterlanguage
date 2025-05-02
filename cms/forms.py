@@ -4,14 +4,30 @@ from django import forms
 
 class PaisForm(forms.ModelForm):
     class Meta:
-        model =  pais
+        model = pais
         fields = ['codigo', 'nombre', 'nacionalidad', 'moneda']
         widgets = {
             'codigo': forms.TextInput(attrs={'class': 'form-control'}),
             'nombre': forms.TextInput(attrs={'class': 'form-control'}),
             'nacionalidad': forms.TextInput(attrs={'class': 'form-control'}),
-            'moneda': forms.TextInput(attrs={'class': 'form-control'}),            
+            'moneda': forms.TextInput(attrs={'class': 'form-control'}),
         }
+
+    def clean_codigo(self):
+        codigo = self.cleaned_data['codigo']
+        return codigo.upper()
+
+    def clean_nombre(self):
+        nombre = self.cleaned_data['nombre']
+        return nombre.capitalize()
+
+    def clean_nacionalidad(self):
+        nacionalidad = self.cleaned_data['nacionalidad']
+        return nacionalidad.capitalize()
+
+    def clean_moneda(self):
+        moneda = self.cleaned_data['moneda']
+        return moneda.upper()
 
 
 class RegionForm(forms.ModelForm):

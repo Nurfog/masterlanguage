@@ -1,7 +1,4 @@
 from django.db import models
-from django import template
-from django.utils.safestring import mark_safe
-
 
 class pais(models.Model):
     id = models.AutoField(primary_key=True)
@@ -23,11 +20,7 @@ class pais(models.Model):
             models.Index(fields=['id'], name='idx_pais_titulo'),
         ]
 
-    def update (self, *args, **kwargs):        
-        super().update(*args, **kwargs)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
 
 class region(models.Model):
     id = models.AutoField(primary_key=True)

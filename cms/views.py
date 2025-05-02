@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from .models import *
@@ -8,7 +8,7 @@ from .forms import *
 @login_required
 @csrf_exempt
 def dashboardcms(request):
-    return render(request, 'pages/dashboardcms.html')
+    return render(request, 'pages/lista_paises.html')
 
 
 @login_required
@@ -18,11 +18,11 @@ def crear_pais(request):
         form = PaisForm(request.POST)
         if form.is_valid():
             #guardar los datos en la base de datos en mayuscula
-            form.codigo = form.cleaned_data['codigo'].upper()
-            form.nombre = form.cleaned_data['nombre'].capitalize()
-            form.nacionalidad = form.cleaned_data['nacionalidad'].capitalize()
-            form.moneda = form.cleaned_data['moneda'].upper()
-            form.save()
+            form.cleaned_data['codigo'] = form.cleaned_data['codigo'].upper()
+            form.cleaned_data['nombre'] = form.cleaned_data['nombre'].capitalize()
+            form.cleaned_data['nacionalidad'] = form.cleaned_data['nacionalidad'].capitalize()
+            form.cleaned_data['moneda'] = form.cleaned_data['moneda'].upper()
+            form.save()            
             return redirect('lista_paises')
     else: 
         form = PaisForm()
@@ -34,18 +34,13 @@ def lista_paises(request):
     return render(request, 'pages/lista_paises.html', {'paises': paises})
 
 @login_required
-@csrf_exempt
 def editar_pais(request, id):
-    paix = pais.objects.get(id=id)
+    paix = get_object_or_404(pais, id=id)
     if request.method == 'POST':
         form = PaisForm(request.POST, instance=paix)
         if form.is_valid():
-            #guardar los datos en la base de datos en mayuscula
-            form.codigo = form.cleaned_data['codigo'].upper()
-            form.nombre = form.cleaned_data['nombre'].capitalize()
-            form.nacionalidad = form.cleaned_data['nacionalidad'].capitalize()
-            form.moneda = form.cleaned_data['moneda'].upper()
-            form.save()
+            # Las transformaciones deberían estar en el método `clean` del formulario
+            form.save()  # Guarda los cambios en la instancia
             return redirect('lista_paises')
     else:
         form = PaisForm(instance=paix)
