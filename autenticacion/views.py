@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+
 
 def login_page(request):
     # Chequea que el método HTTP sea POST (formulario de envío)
@@ -25,7 +27,7 @@ def login_page(request):
         else:
             # Inicializa la sesión y redirecciona a la página dashboard
             login(request, user)
-            return redirect('/lms/dashboard/')
+            return redirect('dashboardcms')
     
     # Renderiza la página de inicio de sesión (GET request)
     return render(request, 'account/login.html')
@@ -78,61 +80,4 @@ def edit_profile(request):
 
 def change_password(request):
     return render(request, 'account/change_password.html')
-
-def password_reset_request(request):
-    return render(request, 'account/password_reset.html')
-
-def password_reset_done(request):
-    return render(request, 'account/password_reset_done.html')
-
-def password_reset_confirm(request):
-    return render(request, 'account/password_reset_confirm.html')
-
-def password_reset_complete(request):
-    return render(request, 'account/password_reset_complete.html')
-
-def activate(request, uidb64, token):
-    return render(request, 'account/activate.html')
-
-def activate_success(request):
-    return render(request, 'account/activate_success.html')
-
-def activate_failed(request):
-    return render(request, 'account/activate_failed.html')
-
-def resend_activation_email(request):
-    return render(request, 'account/resend_activation_email.html')
-
-def activate_account(request):
-    return render(request, 'account/activate_account.html')
-
-def activate_account_success(request):
-    return render(request, 'account/activate_account_success.html')
-
-def activate_account_failed(request):
-    return render(request, 'account/activate_account_failed.html')
-
-def activate_account_resend(request):
-    return render(request, 'account/activate_account_resend.html')
-
-def activate_account_resend_success(request):
-    return render(request, 'account/activate_account_resend_success.html')
-
-def activate_account_resend_failed(request):
-    return render(request, 'account/activate_account_resend_failed.html')
-
-def activate_account_resend_email(request):
-    return render(request, 'account/activate_account_resend_email.html')
-
-def activate_account_resend_email_success(request):
-    return render(request, 'account/activate_account_resend_email_success.html')
-
-def activate_account_resend_email_failed(request):
-    return render(request, 'account/activate_account_resend_email_failed.html')
-
-def activate_account_resend_email_sent(request):
-    return render(request, 'account/activate_account_resend_email_sent.html')
-
-def activate_account_resend_email_sent_success(request):
-    return render(request, 'account/activate_account_resend_email_sent_success.html')
 
